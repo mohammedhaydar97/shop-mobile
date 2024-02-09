@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CategoryIcon extends StatelessWidget {
-  final int index;
+  final String name;
+  final String imageUrl;
 
-  const CategoryIcon({Key? key, required this.index}) : super(key: key);
+  const CategoryIcon({
+    Key? key,
+    required this.name,
+    required this.imageUrl,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,18 +16,20 @@ class CategoryIcon extends StatelessWidget {
       width: 75.0,
       height: 75.0,
       margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.blue,
       ),
-      child: Center(
-        child: Text(
-          '$index',
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            imageUrl,
+            width: 50,
+            height: 50,
+            fit: BoxFit.cover,
           ),
-        ),
+          SizedBox(height: 5), // Spacer
+        ],
       ),
     );
   }

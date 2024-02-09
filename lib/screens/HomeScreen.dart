@@ -1,20 +1,18 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:shopmobile/screens/CartScree.dart';
-import 'package:shopmobile/widgets/stateful/library/BottomNavigation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shopmobile/services/products.dart';
 import 'package:shopmobile/widgets/stateful/lists/CategoryList.dart';
 import 'package:shopmobile/widgets/stateful/lists/NewReleaseList.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    ProductsApis productsApis = ProductsApis();
 
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  Widget build(BuildContext context) {
+    productsApis.fetchData();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -32,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              const CategoryList(),
+              CategoryList(),
               Row(
                 children: [
                   Container(
@@ -64,6 +62,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               NewReleaseList(),
+              Container(
+                height: 50,
+                margin: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  'Featured products',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontFamily: 'StolzlDisplay',
+                  ),
+                ),
+              ),
               NewReleaseList(),
             ],
           ),

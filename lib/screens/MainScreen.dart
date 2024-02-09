@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:shopmobile/screens/CartScree.dart';
 import 'package:shopmobile/screens/HomeScreen.dart';
+import 'package:http/http.dart' as http;
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key); // Fix constructor
@@ -40,6 +42,30 @@ class _MainScreenState extends State<MainScreen> {
       case 5:
         print('Settings icon tapped');
         break;
+    }
+
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final String apiUrl =
+        'https://programmertest.district91.com/api/products'; // Replace with your API endpoint
+
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, parse the JSON
+        final Map<String, dynamic> data = json.decode(response.body);
+
+        // Print the result
+        print('API Response: $data');
+      } else {
+        // If the server did not return a 200 OK response, throw an exception.
+        throw Exception('Failed to load data');
+      }
+    } catch (e) {
+      print('Error: $e');
     }
   }
 

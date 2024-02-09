@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shopmobile/screens/LoginScreen.dart';
 import 'package:shopmobile/screens/MainScreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(child: MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pro Shop',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Pro shop'),
@@ -22,12 +24,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
+final counterProvider = StateProvider((ref) => 2);
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
   final String title;
-
-  
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -36,6 +37,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return MainScreen();
+    return const LoginScreen();
   }
 }

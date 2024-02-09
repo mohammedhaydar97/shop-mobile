@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:shopmobile/widgets/statless/categoryIcon.dart';
 
 class CategoryList extends StatelessWidget {
-  const CategoryList({Key? key}) : super(key: key);
+  CategoryList({Key? key}) : super(key: key);
+
+  final List<Map<String, String>> categories = [
+    {"name": "Category 1", "imageUrl": "assets/icons/voice.png"},
+    {"name": "Category 2", "imageUrl": "assets/icons/smartphone.png"},
+    {"name": "Category 3", "imageUrl": "assets/icons/controller.png"},
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -10,8 +16,12 @@ class CategoryList extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: List.generate(6, (index) {
-            return CategoryIcon(index: index);
+          children: List.generate(categories.length, (index) {
+            final category = categories[index];
+            return CategoryIcon(
+              name: category['name']!,
+              imageUrl: category['imageUrl']!,
+            );
           }),
         ),
       ),
