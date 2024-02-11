@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserApis {
   final Dio _dio = Dio();
@@ -14,6 +15,8 @@ class UserApis {
       );
 
       if (response.statusCode == 200) {
+        String token = response.data['token'];
+        await saveToken(token);
         print('Login successful!');
         print(response.data);
         return true;
@@ -23,8 +26,14 @@ class UserApis {
         return false;
       }
     } catch (err) {
-      return false;
       print('--------------------------------Error: $err');
+      return false;
     }
+  }
+
+  Future<void> saveToken(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var tokenString = await prefs.setString('jwt_token', token);
+    print('--------------------------------------------$tokenString');
   }
 }

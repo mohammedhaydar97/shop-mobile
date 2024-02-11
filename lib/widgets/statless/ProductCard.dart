@@ -50,8 +50,8 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 Center(
-                  child: Image.asset(
-                    'assets/images/shoes1.png',
+                  child: Image.network(
+                    product.image,
                     fit: BoxFit.fill,
                     width: double.infinity,
                     height: double.infinity,
@@ -75,15 +75,15 @@ class ProductCard extends StatelessWidget {
                     fontFamily: 'StolzlDisplay',
                   ),
                 ),
-                const Expanded(
-                  child: RatingBar.readOnly(
-                    size: 25,
-                    filledIcon: Icons.star,
-                    emptyIcon: Icons.star_border,
-                    initialRating: 4,
-                    maxRating: 5,
-                  ),
-                ),
+                // const Expanded(
+                //   child: RatingBar.readOnly(
+                //     size: 25,
+                //     filledIcon: Icons.star,
+                //     emptyIcon: Icons.star_border,
+                //     initialRating: 4,
+                //     maxRating: 5,
+                //   ),
+                // ),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(

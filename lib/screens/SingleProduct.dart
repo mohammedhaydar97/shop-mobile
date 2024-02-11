@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SingleProductScreen extends StatelessWidget {
   final String productName;
@@ -35,8 +36,8 @@ class SingleProductScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 300,
-                child: Image.asset(
-                  'assets/images/shoes1.png',
+                child: Image.network(
+                  productImage,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -74,6 +75,39 @@ class SingleProductScreen extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: FractionallySizedBox(
+                widthFactor: 0.9,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    // Replace with the actual phone number, including country code (without + sign)
+                    const phoneNumber = "+96103395854";
+
+                    // Use the URL scheme to open WhatsApp chat, handling potential errors
+                    final url = Uri.parse('https://wa.me/$phoneNumber');
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(url);
+                    } else {
+                      throw 'Could not launch WhatsApp';
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(1, 60),
+                    backgroundColor: Colors.green,
+                  ),
+                  child: const Text(
+                    'Whatsapp',
+                    style: TextStyle(
+                        fontFamily: 'StolzlDisplay',
+                        fontSize: 23,
+                        color: Colors.white),
+                  ),
+                ),
+              ),
             ),
           ),
           Expanded(

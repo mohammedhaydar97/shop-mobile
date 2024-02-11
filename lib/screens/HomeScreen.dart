@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shopmobile/screens/AllProducts.dart';
 import 'package:shopmobile/services/products.dart';
 import 'package:shopmobile/widgets/stateful/lists/CategoryList.dart';
 import 'package:shopmobile/widgets/stateful/lists/NewReleaseList.dart';
@@ -46,15 +47,25 @@ class HomeScreen extends ConsumerWidget {
                     ),
                   ),
                   Expanded(
-                    child: Container(
-                      height: 50,
-                      margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                      alignment: Alignment.centerRight,
-                      child: const Text(
-                        'All',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontFamily: 'StolzlDisplay',
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AllProducts(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 50,
+                        margin: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        alignment: Alignment.centerRight,
+                        child: const Text(
+                          'All',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontFamily: 'StolzlDisplay',
+                          ),
                         ),
                       ),
                     ),

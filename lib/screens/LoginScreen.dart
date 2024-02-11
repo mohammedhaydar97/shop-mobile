@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopmobile/screens/MainScreen.dart';
 import 'package:shopmobile/services/User.dart';
+import 'package:shopmobile/utils/Auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -13,6 +14,12 @@ class _LoginScreenState extends State<LoginScreen> {
   UserApis userApi = UserApis();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  Auth authController = Auth();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

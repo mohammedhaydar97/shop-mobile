@@ -54,7 +54,7 @@ class _MainBottomNavigationBarState extends State<MainBottomNavigationBar> {
         Icon(Icons.search),
         Icon(Icons.shopping_cart),
         Icon(Icons.favorite),
-        Icon(Icons.person),
+        Icon(Icons.exit_to_app),
         Icon(Icons.settings),
       ],
     );

@@ -1,9 +1,12 @@
 import 'dart:convert';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shopmobile/screens/CartScree.dart';
 import 'package:shopmobile/screens/HomeScreen.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopmobile/screens/LoginScreen.dart';
+import 'package:shopmobile/utils/Auth.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key); // Fix constructor
@@ -13,6 +16,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   int _currentIndex = 0;
   final screens = [HomeScreen(), CartScreen(), CartScreen()];
 
@@ -69,7 +77,6 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -79,6 +86,22 @@ class _MainScreenState extends State<MainScreen> {
             fontFamily: 'StolzlDisplay',
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () async {
+              // Clear SharedPreferences
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.clear();
+
+              // Navigate to another page
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+              );
+            },
+          ),
+        ],
       ),
       body: screens[_currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
